@@ -6,7 +6,7 @@
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 18:35:51 by acan              #+#    #+#             */
-/*   Updated: 2024/04/18 19:08:58 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/04/18 19:24:33 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_data
 // FUNCTIONS
 
 // FILE_CHECK_FUNCTIONS
-void		check_file_path(char *file);
+void		check_file(char *file, t_data *data);
 void		check_map(t_data *data);
 void		check_textures(t_data *data);
 void		match_line_to_texture(t_data *data, int *count);

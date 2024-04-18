@@ -6,7 +6,7 @@
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:58:13 by senyilma          #+#    #+#             */
-/*   Updated: 2024/04/18 19:14:25 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/04/18 19:55:13 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,10 @@ static void	check_map_is_valid(t_data *data)
 		j = -1;
 		while (backupmap[i][++j])
 		{
-			check_char_is_valid(backupmap[i][j]);
+			check_char_is_valid(data->map[i][j]);
 			check_player_singularity(i, j, data);
-			check_surround_by_walls(backupmap, i, j);
+			if (ft_strchr("NESW0", backupmap[i][j]))
+				check_surround_by_walls(backupmap, i, j);
 		}
 	}
 	double_free(backupmap);

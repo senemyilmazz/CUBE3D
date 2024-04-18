@@ -6,7 +6,7 @@
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 18:37:39 by acan              #+#    #+#             */
-/*   Updated: 2024/04/18 19:14:53 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/04/18 19:23:02 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		printerror("Argument error");
 	init_data(&data);
-	file_check(av[1], &data);
+	check_file(av[1], &data);
 	system("leaks cub3D");
 	return (0);
 }

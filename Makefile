@@ -1,9 +1,10 @@
 
-SRCS =	./get_next_line/get_next_line_utils.c ./get_next_line/get_next_line.c \
-		cub3D.c utils.c file_check.c read_file.c check_textures.c \
-		check_map.c read_file_utils.c\
+SRCS =	./inc/get_next_line/get_next_line_utils.c ./inc/get_next_line/get_next_line.c \
+		./src/cub3D.c ./src/utils/utils.c ./src/utils/file_path_utils.c  ./src/utils/error_utils.c \
+		./src/file_check/check_file.c  ./src/file_check/check_textures.c \
+		./src/file_check/check_map.c ./src/file_check/check_map_utils.c \
 
-LIBFT = ./libft/libft.a
+LIBFT = ./inc/libft/libft.a
 
 OBJS = $(SRCS:.c=.o)
 
@@ -17,7 +18,7 @@ CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 all:$(LIBFT) $(NAME)
 
 $(LIBFT):
-	@make -C libft
+	@make -C ./inc/libft
 
 $(NAME): $(OBJS)
 	@clear

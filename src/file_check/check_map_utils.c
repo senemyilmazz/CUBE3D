@@ -6,7 +6,7 @@
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:16:32 by senyilma          #+#    #+#             */
-/*   Updated: 2024/04/18 19:14:12 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/04/18 19:44:07 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	check_surround_by_walls(char **map, int i, int j)
 		return ;
 
 	map[i][j] = '.';
-	check_wall_is_close(map, i - 1, j);
-	check_wall_is_close(map, i, j - 1);
-	check_wall_is_close(map, i + 1, j);
-	check_wall_is_close(map, i, j + 1);
+	check_surround_by_walls(map, i - 1, j);
+	check_surround_by_walls(map, i, j - 1);
+	check_surround_by_walls(map, i + 1, j);
+	check_surround_by_walls(map, i, j + 1);
 }
