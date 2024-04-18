@@ -6,13 +6,13 @@
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:58:13 by senyilma          #+#    #+#             */
-/*   Updated: 2024/04/18 16:19:53 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/04/18 19:14:25 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../../inc/cub3D.h"
 
-static void	check_existance_of_map(t_data *data)
+static void	check_map_is_exist(t_data *data)
 {
 	while (*data->file)
 	{
@@ -23,7 +23,7 @@ static void	check_existance_of_map(t_data *data)
 		data->file++;
 	}
 	if (!*data->file)
-		printerror("No map found.");
+		printerror("No map exist.");
 }
 
 static void	read_map(t_data *data)
@@ -41,29 +41,25 @@ static void	check_map_is_valid(t_data *data)
 	int		j;
 	char	**backupmap;
 
-	map_backup(data->map, &backupmap);
+	backup_map(data->map, &backupmap);
 	i = -1;
 	while (backupmap[++i])
 	{
-		if (!own_strcmp(data->map[i], "\0"))
-			printerror("Invalid map.");
+		check_line_is_not_empty(data->map[i]);
 		j = -1;
 		while (backupmap[i][++j])
 		{
-			if (!ft_strchr("NSWE01 ", data->map[i][j]))
-				printerror("Invalid map.");
-			if (ft_strchr("NSWE0", backupmap[i][j]))
-				floodfill(backupmap, i, j, data);
+			check_char_is_valid(backupmap[i][j]);
+			check_player_singularity(i, j, data);
+			check_surround_by_walls(backupmap, i, j);
 		}
 	}
 	double_free(backupmap);
-	if (data->player->x == -1)
-		printerror("Player not found.");
 }
 
 void	check_map(t_data *data)
 {
-	check_existance_of_map(data);
+	check_map_is_exist(data);
 	read_map(data);
 	check_map_is_valid(data);
 }

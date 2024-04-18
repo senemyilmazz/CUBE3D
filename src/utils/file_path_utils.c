@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_check.c                                       :+:      :+:    :+:   */
+/*   file_path_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 18:38:25 by acan              #+#    #+#             */
-/*   Updated: 2024/04/18 15:08:49 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/04/18 19:14:39 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../../inc/cub3D.h"
 
-static void	open_check(char *file)
+void	open_check(char *file)
 {
 	int	fd;
 
@@ -38,7 +38,7 @@ void	extension_check(char *file, char *extension)
 	}
 }
 
-static void	hidden_file_check(char *file)
+void	hidden_file_check(char *file)
 {
 	int	i;
 
@@ -59,11 +59,4 @@ static void	hidden_file_check(char *file)
 		}
 		i++;
 	}
-}
-
-void	file_check(char *file)
-{
-	open_check(file);
-	hidden_file_check(file);
-	extension_check(file, ".cub");
 }

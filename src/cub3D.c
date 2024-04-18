@@ -6,11 +6,11 @@
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 18:37:39 by acan              #+#    #+#             */
-/*   Updated: 2024/04/18 15:08:05 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/04/18 19:14:53 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../inc/cub3D.h"
 
 static void	init_data(t_data *data)
 {
@@ -34,9 +34,8 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		printerror("Argument error");
-	file_check(av[1]);
 	init_data(&data);
-	read_file(av[1], &data);
+	file_check(av[1], &data);
 	system("leaks cub3D");
 	return (0);
 }
