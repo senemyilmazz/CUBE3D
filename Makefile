@@ -1,6 +1,7 @@
 
 SRCS =	./get_next_line/get_next_line_utils.c ./get_next_line/get_next_line.c \
-		cub3D.c utils.c file_check.c read_file.c
+		cub3D.c utils.c file_check.c read_file.c check_textures.c \
+		check_map.c read_file_utils.c\
 
 LIBFT = ./libft/libft.a
 
