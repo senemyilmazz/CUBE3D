@@ -6,7 +6,7 @@
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 08:54:58 by senyilma          #+#    #+#             */
-/*   Updated: 2024/04/18 19:14:29 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/04/20 15:37:12 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	atoi_for_rgb(const char *str)
 	}
 	if (code[count] != '\0')
 		printerror("Invalid texture : Invalid RGB value detected.");
-	free(code);
+	free_and_set_null(code);
 	return (result);
 }
 
@@ -70,7 +70,7 @@ static int	init_fc(int **texture, char *line)
 	if (i != 3)
 		printerror("Invalid texture : Invalid RGB value detected.");
 	double_free(rgb);
-	free(path);
+	free_and_set_null(path);
 	return (1);
 }
 
@@ -93,7 +93,7 @@ void	match_line_to_texture(t_data *data, int *count)
 		*count += init_fc(&data->textures->c, trimmedline);
 	else if (own_strcmp(*data->file, "\0"))
 		printerror("Invalid texture : Undefined file content detected.");
-	free(trimmedline);
+	free_and_set_null(trimmedline);
 }
 
 void	check_textures(t_data *data)
@@ -104,7 +104,7 @@ void	check_textures(t_data *data)
 	while (*data->file)
 	{
 		match_line_to_texture(data, &texturecount);
-		free(*data->file);
+		free_and_set_null(*data->file);
 		data->file++;
 		if (texturecount == 6)
 			break ;

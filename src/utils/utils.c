@@ -6,7 +6,7 @@
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 18:40:31 by acan              #+#    #+#             */
-/*   Updated: 2024/04/18 19:14:43 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/04/20 15:37:35 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,42 @@ void	double_free(char **str)
 		return ;
 	while (str[i])
 	{
-		free(str[i]);
+		free_and_set_null(str[i]);
 		i++;
 	}
 	free(str);
+	str = NULL;
+}
+
+void	free_and_set_null(char *str)
+{
+	if (!str)
+		return ;
+	free(str);
+	str = NULL;
+}
+
+char	*own_strjoin(char *s1, char *s2)
+{
+	char	*s1s2;
+	size_t	i;
+	size_t	j;
+
+	if (!s1 && !s2)
+		return (NULL);
+	s1s2 = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!s1s2)
+	{
+		return (NULL);
+	}
+	i = -1;
+	while (++i < ft_strlen(s1))
+		s1s2[i] = s1[i];
+	j = -1;
+	while (++j < ft_strlen(s2))
+		s1s2[i + j] = s2[j];
+	s1s2[i + j] = '\0';
+	if (s1)
+		free_and_set_null((char *)s1);
+	return (s1s2);
 }

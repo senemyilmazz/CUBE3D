@@ -1,65 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map_utils.c                                  :+:      :+:    :+:   */
+/*   read_map_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 15:16:32 by senyilma          #+#    #+#             */
-/*   Updated: 2024/04/18 19:44:07 by senyilma         ###   ########.fr       */
+/*   Created: 2024/04/20 15:40:49 by senyilma          #+#    #+#             */
+/*   Updated: 2024/04/20 15:41:00 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D.h"
 
-void	backup_map(char **map, char ***backupmap)
+int	find_max_len(char **content)
 {
-	int	i;
+	int		max_len;
+	int		len;
 
-	i = -1;
-	*backupmap = NULL;
-	while (map[++i])
-		(*backupmap) = double_strjoin((*backupmap), ft_strdup(map[i]));
-}
-
-void	check_line_is_not_empty(char *line)
-{
-	if (!own_strcmp(line, "\0"))
-		printerror("Invalid map : Empty line detected!");
-}
-
-void	check_char_is_valid(char c)
-{
-	if (!ft_strchr("NSWE01 ", c))
-		printerror("Invalid map : Undefined character detected!");
-}
-
-void	check_player_singularity(int i, int j, t_data *data)
-{
-	static int	playercount;
-
-	if (ft_strchr("NSWE", data->map[i][j]))
+	max_len = 0;
+	while (*content)
 	{
-		playercount++;
-		data->player->x = i;
-		data->player->y = j;
+		len = ft_strlen(*content);
+		if (len > max_len)
+			max_len = len;
+		content++;
 	}
-	if (playercount > 1)
-		printerror("Invalid map : Multiplayer cannot be allowed!");
-	if (!data->map[i + 1] && !data->map[i][j + 1] && data->player->x == -1)
-		printerror("Invalid map : Player not found!");
+	return (max_len);
 }
 
-void	check_surround_by_walls(char **map, int i, int j)
+char	*add_null(char *line, int max_len)
 {
-	if (!map[i] || !map[i][j] || map[i][j] == ' ')
-		printerror("Invalid map : Unclosed map detected!");
-	if (map[i][j] == '1' || map[i][j] == '.')
-		return ;
+	int		i;
+	char	*spaces_to_add;
 
-	map[i][j] = '.';
-	check_surround_by_walls(map, i - 1, j);
-	check_surround_by_walls(map, i, j - 1);
-	check_surround_by_walls(map, i + 1, j);
-	check_surround_by_walls(map, i, j + 1);
+	spaces_to_add = NULL;
+	i = ft_strlen(line) - 1;
+	while (++i < max_len)
+		spaces_to_add = own_strjoin(spaces_to_add, " ");
+	line = own_strjoin(line, spaces_to_add);
+	free_and_set_null(spaces_to_add);
+	return (line);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_check.c                                       :+:      :+:    :+:   */
+/*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 19:50:10 by acan              #+#    #+#             */
-/*   Updated: 2024/04/18 19:14:32 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/04/20 15:36:26 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	get_lines(char *file, t_data *data)
 	while (line_nl)
 	{
 		line = ft_strtrim(line_nl, "\n");
-		free(line_nl);
+		free_and_set_null(line_nl);
 		data->file = double_strjoin(data->file, line);
 		line_nl = get_next_line(fd);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acan <ahmetabdullahcan@outlook.com>        +#+  +:+       +#+        */
+/*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 11:15:18 by acan              #+#    #+#             */
-/*   Updated: 2023/07/06 13:24:06 by acan             ###   ########.fr       */
+/*   Updated: 2024/04/20 15:15:20 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ size_t	ft_strlen(const char *s)
 	size_t	len;
 
 	len = 0;
-	while (s[len])
-		len++;
+	if (s && *s)
+	{
+		while (s[len])
+			len++;
+	}
 	return (len);
 }

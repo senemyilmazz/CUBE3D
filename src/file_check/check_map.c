@@ -6,7 +6,7 @@
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:58:13 by senyilma          #+#    #+#             */
-/*   Updated: 2024/04/18 19:55:13 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/04/20 16:04:52 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ static void	check_map_is_exist(t_data *data)
 {
 	while (*data->file)
 	{
-		if (ft_strnstr(*data->file, "111", 3) != 0)
+		if (ft_strchr(*data->file, '1'))
 			break ;
 		match_line_to_texture(data, NULL);
-		free(*data->file);
+		free_and_set_null(*data->file);
 		data->file++;
 	}
 	if (!*data->file)
@@ -28,9 +28,14 @@ static void	check_map_is_exist(t_data *data)
 
 static void	read_map(t_data *data)
 {
+	size_t	max_len;
+	char	*line;
+
+	max_len = find_max_len(data->file);
 	while (*data->file)
 	{
-		data->map = double_strjoin(data->map, *data->file);
+		line = add_null(*data->file, max_len);
+		data->map = double_strjoin(data->map, line);
 		data->file++;
 	}
 }
@@ -45,12 +50,12 @@ static void	check_map_is_valid(t_data *data)
 	i = -1;
 	while (backupmap[++i])
 	{
-		check_line_is_not_empty(data->map[i]);
+		check_line_is_not_empty(*data->file);
 		j = -1;
 		while (backupmap[i][++j])
 		{
 			check_char_is_valid(data->map[i][j]);
-			check_player_singularity(i, j, data);
+			check_player_is_single(i, j, data);
 			if (ft_strchr("NESW0", backupmap[i][j]))
 				check_surround_by_walls(backupmap, i, j);
 		}
