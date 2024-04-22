@@ -38,15 +38,16 @@ void	check_player_is_single(int i, int j, t_data *data)
 {
 	static int	playercount;
 
-	if (ft_strchr("NSWE", data->map[i][j]))
+	if (ft_strchr("NSWE", data->map->map[i][j]))
 	{
 		playercount++;
-		data->player->x = i;
-		data->player->y = j;
+		data->player->pos_x = i;
+		data->player->pos_y = j;
+		data->player->pos_dir = data->map->map[i][j];
 	}
 	if (playercount > 1)
 		printerror("Invalid map : Multiplayer cannot be allowed!");
-	if (!data->map[i + 1] && !data->map[i][j + 1] && data->player->x == -1)
+	if (!data->map->map[i + 1] && !data->map->map[i][j + 1] && data->player->pos_x == -1)
 		printerror("Invalid map : Player not found!");
 }
 

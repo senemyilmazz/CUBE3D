@@ -23,9 +23,12 @@ static void	init_data(t_data *data)
 	data->textures->ea = NULL;
 	data->textures->f = NULL;
 	data->textures->c = NULL;
-	data->player = malloc(sizeof(t_koordinate));
-	data->player->x = -1;
-	data->player->y = -1;
+	data->map = malloc(sizeof(t_map));
+	data->map->height = 0;
+	data->map->width = 0;
+	data->player = malloc(sizeof(t_player));
+	data->player->pos_x = -1;
+	data->player->pos_y = -1;
 }
 
 int	main(int ac, char **av)

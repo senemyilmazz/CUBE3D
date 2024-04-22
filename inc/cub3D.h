@@ -30,18 +30,26 @@ typedef struct s_texture
 	int		*c;
 }			t_texture;
 
-typedef struct s_koordinate
+typedef struct s_map
 {
-	int		x;
-	int		y;
-}			t_koordinate;
+	char	**map;
+	size_t	width;
+	size_t	height;
+}			t_map;
+
+typedef struct s_player
+{
+	char	pos_dir;
+	int		pos_x;
+	int		pos_y;
+}			t_player;
 
 typedef struct s_data
 {
 	char			**file;
-	char			**map;
 	t_texture		*textures;
-	t_koordinate	*player;
+	t_map			*map;
+	t_player		*player;
 }					t_data;
 
 // FUNCTIONS

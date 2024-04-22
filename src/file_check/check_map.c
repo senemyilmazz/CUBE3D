@@ -32,11 +32,13 @@ static void	read_map(t_data *data)
 	char	*line;
 
 	max_len = find_max_len(data->file);
+	data->map->width = max_len;
 	while (*data->file)
 	{
 		line = add_null(*data->file, max_len);
-		data->map = double_strjoin(data->map, line);
+		data->map->map = double_strjoin(data->map->map, line);
 		data->file++;
+		data->map->height++;
 	}
 }
 
@@ -46,7 +48,7 @@ static void	check_map_is_valid(t_data *data)
 	int		j;
 	char	**backupmap;
 
-	backup_map(data->map, &backupmap);
+	backup_map(data->map->map, &backupmap);
 	i = -1;
 	while (backupmap[++i])
 	{
@@ -54,7 +56,7 @@ static void	check_map_is_valid(t_data *data)
 		j = -1;
 		while (backupmap[i][++j])
 		{
-			check_char_is_valid(data->map[i][j]);
+			check_char_is_valid(data->map->map[i][j]);
 			check_player_is_single(i, j, data);
 			if (ft_strchr("NESW0", backupmap[i][j]))
 				check_surround_by_walls(backupmap, i, j);
