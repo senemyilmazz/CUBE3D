@@ -6,7 +6,7 @@
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 18:35:51 by acan              #+#    #+#             */
-/*   Updated: 2024/04/20 15:35:16 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/04/25 17:09:52 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,25 @@ typedef struct s_texture
 	int		*c;
 }			t_texture;
 
+typedef struct s_player
+{
+	int		pos_x;
+	int		pos_y;
+	char	viewdir;
+}			t_player;
+
 typedef struct s_map
 {
 	char	**map;
-	size_t	width;
+	size_t	weight;
 	size_t	height;
 }			t_map;
-
-typedef struct s_player
-{
-	char	pos_dir;
-	int		pos_x;
-	int		pos_y;
-}			t_player;
 
 typedef struct s_data
 {
 	char			**file;
-	t_texture		*textures;
 	t_map			*map;
+	t_texture		*textures;
 	t_player		*player;
 }					t_data;
 

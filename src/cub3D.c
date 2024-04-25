@@ -6,7 +6,7 @@
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 18:37:39 by acan              #+#    #+#             */
-/*   Updated: 2024/04/18 19:23:02 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/04/25 17:11:06 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 static void	init_data(t_data *data)
 {
 	data->file = NULL;
-	data->map = NULL;
+	data->map = malloc(sizeof(t_map));
+	data->map->map = NULL;
 	data->textures = malloc(sizeof(t_texture));
 	data->textures->no = NULL;
 	data->textures->so = NULL;
@@ -23,9 +24,6 @@ static void	init_data(t_data *data)
 	data->textures->ea = NULL;
 	data->textures->f = NULL;
 	data->textures->c = NULL;
-	data->map = malloc(sizeof(t_map));
-	data->map->height = 0;
-	data->map->width = 0;
 	data->player = malloc(sizeof(t_player));
 	data->player->pos_x = -1;
 	data->player->pos_y = -1;
@@ -39,7 +37,8 @@ int	main(int ac, char **av)
 		printerror("Argument error");
 	init_data(&data);
 	check_file(av[1], &data);
-	system("leaks cub3D");
+
+	//system("leaks cub3D");
 	return (0);
 }
 

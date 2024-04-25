@@ -6,7 +6,7 @@
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:16:32 by senyilma          #+#    #+#             */
-/*   Updated: 2024/04/20 15:40:45 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/04/20 18:40:18 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,14 @@ void	check_player_is_single(int i, int j, t_data *data)
 	if (ft_strchr("NSWE", data->map->map[i][j]))
 	{
 		playercount++;
-		data->player->pos_x = i;
-		data->player->pos_y = j;
-		data->player->pos_dir = data->map->map[i][j];
+		data->player->pos_x = j + 0.5;
+		data->player->pos_y = i + 0.5;
+		data->player->viewdir = data->map->map[i][j];
 	}
 	if (playercount > 1)
 		printerror("Invalid map : Multiplayer cannot be allowed!");
-	if (!data->map->map[i + 1] && !data->map->map[i][j + 1] && data->player->pos_x == -1)
+	if (!data->map->map[i + 1] && !data->map->map[i][j + 1]
+		&& data->player->pos_x == -1)
 		printerror("Invalid map : Player not found!");
 }
 

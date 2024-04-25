@@ -6,7 +6,7 @@
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:58:13 by senyilma          #+#    #+#             */
-/*   Updated: 2024/04/20 16:04:52 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/04/20 18:28:50 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,13 @@ static void	check_map_is_exist(t_data *data)
 
 static void	read_map(t_data *data)
 {
-	size_t	max_len;
 	char	*line;
 
-	max_len = find_max_len(data->file);
-	data->map->width = max_len;
+	data->map->weight = find_max_len(data->file);
+	data->map->height = 0;
 	while (*data->file)
 	{
-		line = add_null(*data->file, max_len);
+		line = add_null(*data->file, data->map->weight);
 		data->map->map = double_strjoin(data->map->map, line);
 		data->file++;
 		data->map->height++;
