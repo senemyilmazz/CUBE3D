@@ -6,6 +6,8 @@ SRCS =	./inc/get_next_line/get_next_line_utils.c ./inc/get_next_line/get_next_li
 
 LIBFT = ./inc/libft/libft.a
 
+MLX = ./inc/mlx/libmlx.a
+
 OBJS = $(SRCS:.c=.o)
 
 NAME = cub3D
@@ -15,21 +17,25 @@ CC = @gcc
 CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 
-all:$(LIBFT) $(NAME)
+all:$(NAME)
+
+$(MLX):
+	make -C ./inc/mlx
 
 $(LIBFT):
 	@make -C ./inc/libft
 
-$(NAME): $(OBJS)
+$(NAME): $(MLX) $(OBJS)
 	@clear
 	@echo "Compailing please wait"
-	@$(CC) $(CFLAGS) $(SRCS) $(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) $(SRCS) $(LIBFT) $(MLX) -o $(NAME)
 	@clear
 	@rm -rf $(OBJS)
 	@echo "cub3D compailed. for usage './cub3D <map_name>'"
 
 clean:
 	@make -C ./inc/libft clean
+	@make -C ./inc/mlx clean
 	@rm -rf $(OBJS)
 
 fclean: clean

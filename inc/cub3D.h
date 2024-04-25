@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acan <acan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 18:35:51 by acan              #+#    #+#             */
-/*   Updated: 2024/04/25 17:09:52 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/04/25 19:55:25 by acan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,14 @@
 
 // INCLUDES
 # include "./get_next_line/get_next_line.h"
+# include "./mlx/mlx.h"
 # include "./libft/libft.h"
 # include "fcntl.h"
 # include "stdio.h"
+
+
+# define WIDTH 1920
+# define HEIGHT 1080
 
 // STRUCTS
 typedef struct s_texture
@@ -28,6 +33,14 @@ typedef struct s_texture
 	char	*ea;
 	int		*f;
 	int		*c;
+	void	*img_n;
+	void	*img_s;
+	void	*img_w;
+	void	*img_e;
+	int		*addr_n;
+	int		*addr_s;
+	int		*addr_w;
+	int		*addr_e;
 }			t_texture;
 
 typedef struct s_player
@@ -44,9 +57,21 @@ typedef struct s_map
 	size_t	height;
 }			t_map;
 
+typedef struct s_game
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+	char	*addr;
+	int		*bpp;
+	int		*size_line;
+	int		*endian;
+}			t_game;
+
 typedef struct s_data
 {
 	char			**file;
+	t_game			*game;
 	t_map			*map;
 	t_texture		*textures;
 	t_player		*player;
