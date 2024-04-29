@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acan <acan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 17:58:00 by acan              #+#    #+#             */
-/*   Updated: 2024/04/18 00:30:48 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/04/29 18:40:49 by acan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,5 @@ int	ft_atoi(const char *str)
 		result = (result * 10) + str[count] - '0';
 		count++;
 	}
-	
 	return (sign * result);
 }
