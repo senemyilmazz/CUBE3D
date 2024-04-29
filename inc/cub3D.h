@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acan <acan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 18:35:51 by acan              #+#    #+#             */
-/*   Updated: 2024/04/29 15:27:20 by acan             ###   ########.fr       */
+/*   Updated: 2024/04/29 16:55:12 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,10 @@ typedef struct s_game
 	void	*win;
 	void	*img;
 	char	*addr;
-	int		*bpp;
-	int		*size_line;
-	int		*endian;
+	int		bpp;
+	int		size_line;
+	int		endian;
+	int		x;
 }			t_game;
 
 typedef struct s_data
