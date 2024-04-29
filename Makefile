@@ -6,7 +6,7 @@ SRCS =	./inc/get_next_line/get_next_line_utils.c ./inc/get_next_line/get_next_li
 
 LIBFT = ./inc/libft/libft.a
 
-MLX = ./inc/mlx/libmlx.a
+MLX = ./mlx/libmlx.a
 
 OBJS = $(SRCS:.c=.o)
 
@@ -14,18 +14,18 @@ NAME = cub3D
 
 CC = @gcc
 
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 
 all:$(NAME)
 
-$(MLX):
-	make -C ./inc/mlx
-
 $(LIBFT):
 	@make -C ./inc/libft
 
-$(NAME): $(MLX) $(OBJS)
+$(MLX):
+	make -C ./mlx
+
+$(NAME): $(LIBFT) $(MLX) $(OBJS)
 	@clear
 	@echo "Compailing please wait"
 	@$(CC) $(CFLAGS) $(SRCS) $(LIBFT) $(MLX) -o $(NAME)
@@ -35,7 +35,7 @@ $(NAME): $(MLX) $(OBJS)
 
 clean:
 	@make -C ./inc/libft clean
-	@make -C ./inc/mlx clean
+	@make -C ./mlx clean
 	@rm -rf $(OBJS)
 
 fclean: clean

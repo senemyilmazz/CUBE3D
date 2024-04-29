@@ -6,11 +6,11 @@
 /*   By: acan <acan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:05:10 by acan              #+#    #+#             */
-/*   Updated: 2024/04/25 20:02:56 by acan             ###   ########.fr       */
+/*   Updated: 2024/04/29 15:09:37 by acan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../../inc/cub3D.h"
 
 int	close_window(t_data *data)
 {
@@ -52,6 +52,7 @@ void	game(t_data *data)
 	data->game->img = mlx_new_image(data->game->mlx, WIDTH, HEIGHT);
 	data->game->addr = mlx_get_data_addr(data->game->img, data->game->bpp,
 			data->game->size_line, data->game->endian);
-	mlx_hook(data->game->win, 17, 0, close_window, data);
-	mlx_loop(data->game->mlx);
+	game_image(data);
+	// mlx_hook(data->game->win, 17, 0, close_window, data);
+	// mlx_loop(data->game->mlx);
 }

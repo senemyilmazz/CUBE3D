@@ -1,8 +1,8 @@
 
-NO sdfghjk.xpm
-WE sdfg.xpm
-EA dfkg.xpm
-SO erty.xpm
+NO ./textures/aaa.xpm
+WE ./textures/bbb.xpm
+EA ./textures/ccc.xpm
+SO ./textures/ddd.xpm
 
 F    50 , 126 ,34         
 

@@ -6,7 +6,7 @@
 /*   By: acan <acan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 08:54:58 by senyilma          #+#    #+#             */
-/*   Updated: 2024/04/25 19:34:41 by acan             ###   ########.fr       */
+/*   Updated: 2024/04/29 15:00:04 by acan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	init_nswe(char **texture, char *line)
 		printerror("Invalid texture : Duplicate texture detected.");
 	*texture = ft_strtrim(line + 3, " \n");
 	extension_check(*texture, ".xpm");
-	// open_check(*texture);
+	open_check(*texture);
 	hidden_file_check(*texture);
 	return (1);
 }

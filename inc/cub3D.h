@@ -6,7 +6,7 @@
 /*   By: acan <acan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 18:35:51 by acan              #+#    #+#             */
-/*   Updated: 2024/04/25 19:55:25 by acan             ###   ########.fr       */
+/*   Updated: 2024/04/29 15:27:20 by acan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 // INCLUDES
 # include "./get_next_line/get_next_line.h"
-# include "./mlx/mlx.h"
+# include "../mlx/mlx.h"
 # include "./libft/libft.h"
 # include "fcntl.h"
 # include "stdio.h"
@@ -78,6 +78,8 @@ typedef struct s_data
 }					t_data;
 
 // FUNCTIONS
+void		game(t_data *data);
+
 
 // FILE_CHECK_FUNCTIONS
 void		check_file(char *file, t_data *data);

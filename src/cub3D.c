@@ -6,7 +6,7 @@
 /*   By: acan <acan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 18:37:39 by acan              #+#    #+#             */
-/*   Updated: 2024/04/25 19:33:57 by acan             ###   ########.fr       */
+/*   Updated: 2024/04/29 15:31:53 by acan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(int ac, char **av)
 		printerror("Argument error");
 	init_data(&data);
 	check_file(av[1], &data);
+	game(&data);
 	// system("leaks cub3D");
 	return (0);
 }
