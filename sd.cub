@@ -4,9 +4,9 @@ WE ./textures/bbb.xpm
 EA ./textures/ccc.xpm
 SO ./textures/ddd.xpm
 
-F    50 , 126 ,34         
+F    8, 143, 143
 
-C    50 , 126 ,     34         
+C    255, 255, 255
 
 
 
