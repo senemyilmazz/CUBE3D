@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acan <acan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 18:35:51 by acan              #+#    #+#             */
-/*   Updated: 2024/04/29 18:40:43 by acan             ###   ########.fr       */
+/*   Updated: 2024/04/29 20:10:45 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "./libft/libft.h"
 # include "fcntl.h"
 # include "stdio.h"
+# include "math.h"	
 
 # define WIDTH 1920
 # define HEIGHT 1080
@@ -44,9 +45,8 @@ typedef struct s_texture
 
 typedef struct s_player
 {
-	int			pos_x;
-	int			pos_y;
-	char		viewdir;
+	double		pos_x;
+	double		pos_y;
 }				t_player;
 
 typedef struct s_map
@@ -55,6 +55,26 @@ typedef struct s_map
 	size_t		weight;
 	size_t		height;
 }				t_map;
+
+typedef struct s_view
+{
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
+}				t_view;
+
+typedef struct s_ray
+{
+	double		camera_x;
+	double		raydir_x;
+	double		raydir_y;
+	int			pos_x;
+	int			pos_y;
+	double		deltadist_x;
+	double		deltadist_y;
+	int			hit;
+}				t_ray;
 
 typedef struct s_game
 {
@@ -75,17 +95,21 @@ typedef struct s_data
 	t_map		*map;
 	t_texture	*textures;
 	t_player	*player;
+	t_view		*view;
+	t_ray		*ray;
 }				t_data;
 
 // FUNCTIONS
 void			game(t_data *data);
 int				draw_content(t_data *data);
+void			var_set(t_data *data, int width);
 
 // FILE_CHECK_FUNCTIONS
 void			check_file(char *file, t_data *data);
 void			check_map(t_data *data);
 void			check_textures(t_data *data);
 void			match_line_to_texture(t_data *data, int *count);
+void			set_viewdir(t_data *data, char c);
 
 //	CHECK_MAP_UTIL_FUNCTIONS
 int				find_max_len(char **content);

@@ -1,9 +1,9 @@
 
 SRCS =	./inc/get_next_line/get_next_line_utils.c ./inc/get_next_line/get_next_line.c \
 		./src/cub3D.c ./src/utils/utils.c ./src/utils/file_path_utils.c  ./src/utils/error_utils.c \
-		./src/file_check/check_file.c  ./src/file_check/check_textures.c \
+		./src/file_check/check_file.c  ./src/file_check/check_textures.c ./src/file_check/set_info_to_data.c\
 		./src/file_check/check_map.c ./src/file_check/check_map_utils.c  ./src/file_check/check_map_is_valid_utils.c\
-		./src/game/game_init.c ./src/game/draw_content.c
+		./src/game/game_init.c ./src/game/draw_content.c ./src/game/calculate.c
 
 LIBFT = ./inc/libft/libft.a
 

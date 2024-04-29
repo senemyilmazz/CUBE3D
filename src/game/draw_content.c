@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_content.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acan <acan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:37:47 by acan              #+#    #+#             */
-/*   Updated: 2024/04/29 18:41:12 by acan             ###   ########.fr       */
+/*   Updated: 2024/04/29 20:10:03 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,16 @@ static void	sky_and_surface(t_data *data)
 
 int	draw_content(t_data *data)
 {
+	int	col;
+
 	mlx_clear_window(data->game->mlx, data->game->win);
 	sky_and_surface(data);
+	col = 0;
+	while (col < WIDTH)
+	{
+		var_set(data, col);
+		col++;
+	}
 	mlx_put_image_to_window(data->game->mlx, data->game->win, data->game->img,
 		0, 0);
 	return (0);
