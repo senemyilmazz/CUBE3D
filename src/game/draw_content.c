@@ -6,7 +6,7 @@
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:37:47 by acan              #+#    #+#             */
-/*   Updated: 2024/04/29 20:10:03 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/04/30 18:53:50 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ int	draw_content(t_data *data)
 	while (col < WIDTH)
 	{
 		var_set(data, col);
+		wall_control(data);
+		wall_hit(data);
+		calculate_distance(data);
 		col++;
 	}
 	mlx_put_image_to_window(data->game->mlx, data->game->win, data->game->img,

@@ -6,7 +6,7 @@
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 18:35:51 by acan              #+#    #+#             */
-/*   Updated: 2024/04/29 20:10:45 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/04/30 18:56:39 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,15 @@ typedef struct s_ray
 	double		deltadist_x;
 	double		deltadist_y;
 	int			hit;
+	int			side;
+	int			step_x;
+	int			step_y;
+	double		sidedist_x;
+	double		sidedist_y;
+	double		perpwalldist;
+	int			lineheight;
+	int			drawstart;
+	int			drawend;
 }				t_ray;
 
 typedef struct s_game
