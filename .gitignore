@@ -1,4 +1,3 @@
+*.vscode
 *.dSYM
 *.DS_Store
-*.vscode
-cub3D.dSYM

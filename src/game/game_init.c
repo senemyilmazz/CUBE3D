@@ -6,11 +6,26 @@
 /*   By: acan <acan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:05:10 by acan              #+#    #+#             */
-/*   Updated: 2024/04/29 18:41:36 by acan             ###   ########.fr       */
+/*   Updated: 2024/05/02 19:12:05 by acan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D.h"
+
+void	start_values(t_data *data)
+{
+	data->ray->pos_x = 22;
+	data->ray->pos_y = 12;
+	data->game->x = 0;
+	data->keys->w = 0;
+	data->keys->a = 0;
+	data->keys->s = 0;
+	data->keys->d = 0;
+	data->keys->left = 0;
+	data->keys->right = 0;
+	data->game->rot_speed = 0.05;
+	data->game->move_speed = 0.054;
+}
 
 int	close_window(t_data *data)
 {
@@ -47,6 +62,7 @@ void	game_image(t_data *data)
 
 void	game(t_data *data)
 {
+	start_values(data);
 	data->game->mlx = mlx_init();
 	data->game->win = mlx_new_window(data->game->mlx, WIDTH, HEIGHT, "cub3D");
 	data->game->img = mlx_new_image(data->game->mlx, WIDTH, HEIGHT);

@@ -7,7 +7,7 @@ SRCS =	./inc/get_next_line/get_next_line_utils.c ./inc/get_next_line/get_next_li
 
 LIBFT = ./inc/libft/libft.a
 
-MLX = -L./mlx -lmlx
+MLX = ./mlx/libmlx.a
 
 OBJS = $(SRCS:.c=.o)
 
@@ -28,16 +28,11 @@ $(MLX):
 	make -C ./mlx
 
 $(NAME): $(LIBFT) $(MLX) $(OBJS)
-	@clear
-	@echo "Compailing please wait"
-	@$(CC) $(CFLAGS) $(MFLAGS) $(SRCS) $(LIBFT) -o $(NAME)
-	@clear
-	@rm -rf $(OBJS)
-	@echo "cub3D compailed. for usage './cub3D <map_name>'"
+	$(CC) $(CFLAGS) $(MFLAGS) $(SRCS) $(MLX) $(LIBFT) -o $(NAME)
 
 clean:
-	@make -C ./inc/libft clean
-	@make -C ./mlx clean
+	@make clean -C ./inc/libft
+	@make clean -C ./mlx
 	@rm -rf $(OBJS)
 
 fclean: clean

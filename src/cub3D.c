@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acan <acan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 18:37:39 by acan              #+#    #+#             */
-/*   Updated: 2024/04/29 20:11:06 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/05/02 17:58:23 by acan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	init_data(t_data *data)
 	data->game->img = NULL;
 	data->game->addr = NULL;
 	data->game->x = 0;
+	data->keys = malloc(sizeof(t_keys));
 	data->view = malloc(sizeof(t_view));
 	data->ray = malloc(sizeof(t_ray));
 }
@@ -50,7 +51,7 @@ int	main(int ac, char **av)
 	return (0);
 }
 
- void __attribute__((destructor)) destruct(void)
-{
-    system("leaks cub3D");
-}
+//  void __attribute__((destructor)) destruct(void)
+// {
+//     system("leaks cub3D");
+// }

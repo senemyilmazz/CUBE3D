@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: acan <acan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 18:35:51 by acan              #+#    #+#             */
-/*   Updated: 2024/04/30 18:56:39 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/05/02 17:26:50 by acan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@ typedef struct s_ray
 	int			pos_y;
 	double		deltadist_x;
 	double		deltadist_y;
+	double		wall_pos_x;
+	double		pixel_cal;
+	double		pixel_num;
+	int			tex_x;
+	int			tex_y;
 	int			hit;
 	int			side;
 	int			step_x;
@@ -94,8 +99,21 @@ typedef struct s_game
 	int			bpp;
 	int			size_line;
 	int			endian;
+	double		move_speed;
+	double		rot_speed;
 	int			x;
 }				t_game;
+
+typedef struct s_keys
+{
+	int			w;
+	int			a;
+	int			s;
+	int			d;
+	int			escape;
+	int			left;
+	int			right;
+}				t_keys;
 
 typedef struct s_data
 {
@@ -106,12 +124,17 @@ typedef struct s_data
 	t_player	*player;
 	t_view		*view;
 	t_ray		*ray;
+	t_keys		*keys;
 }				t_data;
 
 // FUNCTIONS
 void			game(t_data *data);
 int				draw_content(t_data *data);
 void			var_set(t_data *data, int width);
+void			wall_hit(t_data *data);
+void			calculate_distance(t_data *data);
+void			wall_control(t_data *data);
+
 
 // FILE_CHECK_FUNCTIONS
 void			check_file(char *file, t_data *data);
