@@ -6,7 +6,7 @@
 /*   By: acan <acan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:05:10 by acan              #+#    #+#             */
-/*   Updated: 2024/05/02 19:12:05 by acan             ###   ########.fr       */
+/*   Updated: 2024/05/03 18:40:20 by acan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	start_values(t_data *data)
 	data->keys->d = 0;
 	data->keys->left = 0;
 	data->keys->right = 0;
-	data->game->rot_speed = 0.05;
-	data->game->move_speed = 0.054;
+	data->game->rot_speed = 0.03;
+	data->game->move_speed = 0.032;
 }
 
 int	close_window(t_data *data)
@@ -74,5 +74,7 @@ void	game(t_data *data)
 	game_image(data);
 	mlx_hook(data->game->win, 17, 0, close_window, data);
 	mlx_loop_hook(data->game->mlx, draw_content, data);
+	mlx_hook(data->game->win, 2, 0, key_press, data);
+	mlx_hook(data->game->win, 3, 0, key_release, data);
 	mlx_loop(data->game->mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: acan <acan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:16:32 by senyilma          #+#    #+#             */
-/*   Updated: 2024/05/02 18:27:43 by acan             ###   ########.fr       */
+/*   Updated: 2024/05/03 18:30:29 by acan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	check_player_is_single(int i, int j, t_data *data)
 		playercount++;
 		data->player->pos_x = j + 0.5;
 		data->player->pos_y = i + 0.5;
+		data->player->player_dir = data->map->map[i][j];
 		set_viewdir(data, data->map->map[i][j]);
 	}
 	if (playercount > 1)
