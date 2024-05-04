@@ -6,7 +6,7 @@
 /*   By: acan <acan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 18:35:51 by acan              #+#    #+#             */
-/*   Updated: 2024/05/02 17:26:50 by acan             ###   ########.fr       */
+/*   Updated: 2024/05/03 21:36:02 by acan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_player
 {
 	double		pos_x;
 	double		pos_y;
+	char		player_dir;
 }				t_player;
 
 typedef struct s_map
@@ -62,6 +63,8 @@ typedef struct s_view
 	double		dir_y;
 	double		plane_x;
 	double		plane_y;
+	double		old_plane_x;
+	double		old_dir_x;
 }				t_view;
 
 typedef struct s_ray
@@ -69,6 +72,7 @@ typedef struct s_ray
 	double		camera_x;
 	double		raydir_x;
 	double		raydir_y;
+	double		old_dir_x;
 	int			pos_x;
 	int			pos_y;
 	double		deltadist_x;
@@ -134,6 +138,11 @@ void			var_set(t_data *data, int width);
 void			wall_hit(t_data *data);
 void			calculate_distance(t_data *data);
 void			wall_control(t_data *data);
+int    			key_press(int key, t_data *data);
+int    			key_release(int key, t_data *data);
+void			move_player(t_data *data);
+void    		cam_right(t_data *data);
+void    		cam_left(t_data *data);
 
 
 // FILE_CHECK_FUNCTIONS
