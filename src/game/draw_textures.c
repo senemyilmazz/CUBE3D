@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_content.c                                     :+:      :+:    :+:   */
+/*   draw_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acan <acan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:37:47 by acan              #+#    #+#             */
-/*   Updated: 2024/05/03 23:43:31 by acan             ###   ########.fr       */
+/*   Updated: 2024/05/07 18:45:02 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,25 +45,6 @@ static void	sky_and_surface(t_data *data)
 	}
 }
 
-void	set_image_values(t_data *data)
-{
-	if (data->ray->side == 0)
-		data->ray->wall_pos_x = data->player->pos_y + data->ray->perpwalldist
-			* data->ray->raydir_y;
-	else
-		data->ray->wall_pos_x = data->player->pos_x + data->ray->perpwalldist
-			* data->ray->raydir_x;
-	data->ray->wall_pos_x -= floor(data->ray->wall_pos_x);
-	data->ray->tex_x = (int)(data->ray->wall_pos_x * 64);
-	if (data->ray->side == 0 && data->ray->raydir_x > 0)
-		data->ray->tex_x = 64 - data->ray->tex_x - 1;
-	if (data->ray->side == 1 && data->ray->raydir_y < 0)
-		data->ray->tex_x = 64 - data->ray->tex_x - 1;
-	data->ray->pixel_cal = 1.0 * 64 / data->ray->lineheight;
-	data->ray->pixel_num = (data->ray->drawstart - HEIGHT / 2
-			+ data->ray->lineheight / 2) * data->ray->pixel_cal;
-}
-
 void	draw_image(t_data *data, int col)
 {
 	int	loop;
@@ -92,14 +73,14 @@ void	draw_image(t_data *data, int col)
 	}
 }
 
-int	draw_content(t_data *data)
+int	draw_textures(t_data *data)
 {
 	int	col;
 
 	mlx_clear_window(data->game->mlx, data->game->win);
 	sky_and_surface(data);
-	col = 0;
-	while (col < WIDTH)
+	col = -1;
+	while (++col < WIDTH)
 	{
 		var_set(data, col);
 		wall_control(data);
@@ -107,7 +88,6 @@ int	draw_content(t_data *data)
 		calculate_distance(data);
 		set_image_values(data);
 		draw_image(data, col);
-		col++;
 	}
 	mlx_put_image_to_window(data->game->mlx, data->game->win, data->game->img,
 		0, 0);

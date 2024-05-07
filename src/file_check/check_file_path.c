@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_path_utils.c                                  :+:      :+:    :+:   */
+/*   check_file_path.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 18:38:25 by acan              #+#    #+#             */
-/*   Updated: 2024/04/18 19:14:39 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/05/07 14:28:58 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,11 @@ void	hidden_file_check(char *file)
 		}
 		i++;
 	}
+}
+
+void	check_file_path(char *file, char *extension)
+{
+	open_check(file);
+	hidden_file_check(file);
+	extension_check(file, extension);
 }

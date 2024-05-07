@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acan <acan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:59:16 by senyilma          #+#    #+#             */
-/*   Updated: 2024/05/03 23:43:12 by acan             ###   ########.fr       */
+/*   Updated: 2024/05/07 17:51:02 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	var_set(t_data *data, int width)
 	data->ray->pos_y = (int)data->player->pos_y;
 	data->ray->deltadist_x = fabs(1 / data->ray->raydir_x);
 	data->ray->deltadist_y = fabs(1 / data->ray->raydir_y);
-	data->ray->hit = 0;
 }
 
 void	wall_control(t_data *data)
@@ -56,7 +55,10 @@ void	wall_control(t_data *data)
 
 void	wall_hit(t_data *data)
 {
-	while (data->ray->hit == 0)
+	int	hit;
+
+	hit = 0;
+	while (hit == 0)
 	{
 		if (data->ray->sidedist_x < data->ray->sidedist_y)
 		{
@@ -70,10 +72,8 @@ void	wall_hit(t_data *data)
 			data->ray->pos_y += data->ray->step_y;
 			data->ray->side = 1;
 		}
-		if (data->map->map[data->ray->pos_y][data->ray->pos_x] == '1')
-		{
-			data->ray->hit = 1;
-		}
+		if (data->map[data->ray->pos_y][data->ray->pos_x] == '1')
+			hit = 1;
 	}
 }
 
@@ -92,4 +92,23 @@ void	calculate_distance(t_data *data)
 	data->ray->drawend = data->ray->lineheight / 2 + HEIGHT / 2;
 	if (data->ray->drawend >= HEIGHT)
 		data->ray->drawend = HEIGHT - 1;
+}
+
+void	set_image_values(t_data *data)
+{
+	if (data->ray->side == 0)
+		data->ray->hit_x = data->player->pos_y + data->ray->perpwalldist
+			* data->ray->raydir_y;
+	else
+		data->ray->hit_x = data->player->pos_x + data->ray->perpwalldist
+			* data->ray->raydir_x;
+	data->ray->hit_x -= floor(data->ray->hit_x);
+	data->ray->tex_x = (int)(data->ray->hit_x * 64);
+	if (data->ray->side == 0 && data->ray->raydir_x > 0)
+		data->ray->tex_x = 64 - data->ray->tex_x - 1;
+	if (data->ray->side == 1 && data->ray->raydir_y < 0)
+		data->ray->tex_x = 64 - data->ray->tex_x - 1;
+	data->ray->pixel_cal = 1.0 * 64 / data->ray->lineheight;
+	data->ray->pixel_num = (data->ray->drawstart - HEIGHT / 2
+			+ data->ray->lineheight / 2) * data->ray->pixel_cal;
 }

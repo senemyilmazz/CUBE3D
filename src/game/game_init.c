@@ -3,20 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acan <acan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:05:10 by acan              #+#    #+#             */
-/*   Updated: 2024/05/03 18:40:20 by acan             ###   ########.fr       */
+/*   Updated: 2024/05/07 18:44:02 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D.h"
 
-void	start_values(t_data *data)
+static void	start_variables(t_data *data)
 {
-	data->ray->pos_x = 22;
-	data->ray->pos_y = 12;
+	data->game->mlx = NULL;
+	data->game->win = NULL;
+	data->game->img = NULL;
+	data->game->addr = NULL;
 	data->game->x = 0;
+	data->textures->img_n = NULL;
+	data->textures->img_s = NULL;
+	data->textures->img_e = NULL;
+	data->textures->img_w = NULL;
+	data->textures->addr_n = NULL;
+	data->textures->addr_s = NULL;
+	data->textures->addr_e = NULL;
+	data->textures->addr_w = NULL;
 	data->keys->w = 0;
 	data->keys->a = 0;
 	data->keys->s = 0;
@@ -27,14 +37,7 @@ void	start_values(t_data *data)
 	data->game->move_speed = 0.032;
 }
 
-int	close_window(t_data *data)
-{
-	mlx_destroy_window(data->game->mlx, data->game->win);
-	exit(0);
-	return (0);
-}
-
-void	game_image(t_data *data)
+static void	set_game_image(t_data *data)
 {
 	data->textures->img_n = mlx_xpm_file_to_image(data->game->mlx,
 			data->textures->no, &data->game->x, &data->game->x);
@@ -60,9 +63,16 @@ void	game_image(t_data *data)
 		printerror("Textures cannot be addressed.");
 }
 
+int	close_window(t_data *data)
+{
+	mlx_destroy_window(data->game->mlx, data->game->win);
+	exit(0);
+	return (0);
+}
+
 void	game(t_data *data)
 {
-	start_values(data);
+	start_variables(data);
 	data->game->mlx = mlx_init();
 	data->game->win = mlx_new_window(data->game->mlx, WIDTH, HEIGHT, "cub3D");
 	data->game->img = mlx_new_image(data->game->mlx, WIDTH, HEIGHT);
@@ -71,10 +81,10 @@ void	game(t_data *data)
 	if (!data->game->addr || !data->game->img
 		|| !data->game->mlx || !data->game->win)
 		printerror("Game cannot be created.");
-	game_image(data);
-	mlx_hook(data->game->win, 17, 0, close_window, data);
-	mlx_loop_hook(data->game->mlx, draw_content, data);
+	set_game_image(data);
+	mlx_loop_hook(data->game->mlx, draw_textures, data);
 	mlx_hook(data->game->win, 2, 0, key_press, data);
 	mlx_hook(data->game->win, 3, 0, key_release, data);
+	mlx_hook(data->game->win, 17, 0, close_window, data);
 	mlx_loop(data->game->mlx);
 }

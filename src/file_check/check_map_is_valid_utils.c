@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_is_valid_utils.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acan <acan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:16:32 by senyilma          #+#    #+#             */
-/*   Updated: 2024/05/03 18:30:29 by acan             ###   ########.fr       */
+/*   Updated: 2024/05/07 18:43:38 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	backup_map(char **map, char ***backupmap)
 
 void	check_line_is_not_empty(char *line)
 {
-	if (!own_strcmp(line, "\0"))
+	if (*line == '\0')
 		printerror("Invalid map : Empty line detected!");
 }
 
@@ -38,17 +38,16 @@ void	check_player_is_single(int i, int j, t_data *data)
 {
 	static int	playercount;
 
-	if (ft_strchr("NSWE", data->map->map[i][j]))
+	if (ft_strchr("NSWE", data->map[i][j]))
 	{
 		playercount++;
 		data->player->pos_x = j + 0.5;
 		data->player->pos_y = i + 0.5;
-		data->player->player_dir = data->map->map[i][j];
-		set_viewdir(data, data->map->map[i][j]);
+		set_view_dir_and_plane(data, data->map[i][j]);
 	}
 	if (playercount > 1)
 		printerror("Invalid map : Multiplayer cannot be allowed!");
-	if (!data->map->map[i + 1] && !data->map->map[i][j + 1]
+	if (!data->map[i + 1] && !data->map[i][j + 1]
 		&& data->player->pos_x == -1)
 		printerror("Invalid map : Player not found!");
 }

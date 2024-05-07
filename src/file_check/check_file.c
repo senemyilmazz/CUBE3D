@@ -6,17 +6,22 @@
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 19:50:10 by acan              #+#    #+#             */
-/*   Updated: 2024/04/29 17:08:33 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/05/07 17:26:01 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3D.h"
 
-static void	check_file_path(char *file)
+static void	start_variables(t_data *data)
 {
-	open_check(file);
-	hidden_file_check(file);
-	extension_check(file, ".cub");
+	data->file = NULL;
+	data->map = NULL;
+	data->textures->no = NULL;
+	data->textures->so = NULL;
+	data->textures->we = NULL;
+	data->textures->ea = NULL;
+	data->textures->f = NULL;
+	data->textures->c = NULL;
 }
 
 static void	get_lines(char *file, t_data *data)
@@ -41,7 +46,8 @@ static void	get_lines(char *file, t_data *data)
 
 void	check_file(char *file, t_data *data)
 {
-	check_file_path(file);
+	start_variables(data);
+	check_file_path(file, ".cub");
 	get_lines(file, data);
 	check_textures(data);
 	check_map(data);

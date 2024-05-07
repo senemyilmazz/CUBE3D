@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acan <acan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 08:54:58 by senyilma          #+#    #+#             */
-/*   Updated: 2024/04/29 15:00:04 by acan             ###   ########.fr       */
+/*   Updated: 2024/05/07 17:11:12 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ static int	init_nswe(char **texture, char *line)
 	if (*texture != NULL)
 		printerror("Invalid texture : Duplicate texture detected.");
 	*texture = ft_strtrim(line + 3, " \n");
-	extension_check(*texture, ".xpm");
-	open_check(*texture);
-	hidden_file_check(*texture);
+	check_file_path(*texture, ".xpm");
 	return (1);
 }
 
@@ -64,6 +62,8 @@ static int	init_fc(int **texture, char *line)
 		printerror("Invalid texture : Invalid RGB value detected.");
 	rgb = ft_split(path, ',');
 	*texture = malloc(sizeof(int) * 3);
+	if (!*texture)
+		printerror("Allocation error!");
 	i = -1;
 	while (rgb[++i] && i < 3)
 		(*texture)[i] = atoi_for_rgb(rgb[i]);

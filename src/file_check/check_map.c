@@ -6,7 +6,7 @@
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:58:13 by senyilma          #+#    #+#             */
-/*   Updated: 2024/04/20 18:28:50 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/05/07 13:56:27 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,14 @@ static void	check_map_is_exist(t_data *data)
 static void	read_map(t_data *data)
 {
 	char	*line;
+	int		weight;
 
-	data->map->weight = find_max_len(data->file);
-	data->map->height = 0;
+	weight = find_max_len(data->file);
 	while (*data->file)
 	{
-		line = add_null(*data->file, data->map->weight);
-		data->map->map = double_strjoin(data->map->map, line);
+		line = add_null(*data->file, weight);
+		data->map = double_strjoin(data->map, line);
 		data->file++;
-		data->map->height++;
 	}
 }
 
@@ -47,15 +46,15 @@ static void	check_map_is_valid(t_data *data)
 	int		j;
 	char	**backupmap;
 
-	backup_map(data->map->map, &backupmap);
+	backup_map(data->map, &backupmap);
 	i = -1;
 	while (backupmap[++i])
 	{
-		check_line_is_not_empty(*data->file);
+		check_line_is_not_empty(backupmap[i]);
 		j = -1;
 		while (backupmap[i][++j])
 		{
-			check_char_is_valid(data->map->map[i][j]);
+			check_char_is_valid(data->map[i][j]);
 			check_player_is_single(i, j, data);
 			if (ft_strchr("NESW0", backupmap[i][j]))
 				check_surround_by_walls(backupmap, i, j);
