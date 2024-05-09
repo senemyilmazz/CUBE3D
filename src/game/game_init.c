@@ -6,7 +6,7 @@
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:05:10 by acan              #+#    #+#             */
-/*   Updated: 2024/05/07 18:44:02 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/05/09 20:05:24 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	start_variables(t_data *data)
 	data->game->win = NULL;
 	data->game->img = NULL;
 	data->game->addr = NULL;
-	data->game->x = 0;
+	data->textures->size = 0;
 	data->textures->img_n = NULL;
 	data->textures->img_s = NULL;
 	data->textures->img_e = NULL;
@@ -40,13 +40,13 @@ static void	start_variables(t_data *data)
 static void	set_game_image(t_data *data)
 {
 	data->textures->img_n = mlx_xpm_file_to_image(data->game->mlx,
-			data->textures->no, &data->game->x, &data->game->x);
+			data->textures->no, &data->textures->size, &data->textures->size);
 	data->textures->img_s = mlx_xpm_file_to_image(data->game->mlx,
-			data->textures->so, &data->game->x, &data->game->x);
+			data->textures->so, &data->textures->size, &data->textures->size);
 	data->textures->img_e = mlx_xpm_file_to_image(data->game->mlx,
-			data->textures->ea, &data->game->x, &data->game->x);
+			data->textures->ea, &data->textures->size, &data->textures->size);
 	data->textures->img_w = mlx_xpm_file_to_image(data->game->mlx,
-			data->textures->we, &data->game->x, &data->game->x);
+			data->textures->we, &data->textures->size, &data->textures->size);
 	if (!data->textures->img_e || !data->textures->img_w
 		|| !data->textures->img_s || !data->textures->img_n)
 		printerror("Textures cannot created or files is not valid.");

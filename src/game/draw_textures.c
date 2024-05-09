@@ -6,7 +6,7 @@
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:37:47 by acan              #+#    #+#             */
-/*   Updated: 2024/05/07 18:45:02 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/05/09 20:27:59 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,29 +45,29 @@ static void	sky_and_surface(t_data *data)
 	}
 }
 
-void	draw_image(t_data *data, int col)
+static void	draw_col(t_data *data, int col)
 {
 	int	loop;
 	int	color;
+	int	tex_index;
 
-	loop = data->ray->drawstart;
-	while (loop < data->ray->drawend)
+	loop = data->ray->draw_start;
+	while (loop < data->ray->draw_end)
 	{
-		data->ray->tex_y = (int)data->ray->pixel_num & (data->game->x - 1);
-		data->ray->pixel_num += data->ray->pixel_cal;
+		data->ray->tex_y_pix_start = (int)data->ray->tex_y_pix_end & \
+		(data->textures->size - 1);
+		data->ray->tex_y_pix_end += data->ray->unit_per_pix;
+		tex_index = data->textures->size * data->ray->tex_y_pix_start + \
+		data->ray->tex_x;
 		if (data->ray->raydir_x > 0 && data->ray->side != 1)
-			color = data->textures->addr_s[data->game->x * data->ray->tex_y
-				+ data->ray->tex_x];
+			color = data->textures->addr_s[tex_index];
 		else if (data->ray->raydir_x < 0 && data->ray->side != 1)
-			color = data->textures->addr_n[data->game->x * data->ray->tex_y
-				+ data->ray->tex_x];
+			color = data->textures->addr_n[tex_index];
 		else if ((data->ray->raydir_x <= 2 && data->ray->raydir_y >= 0)
 			&& data->ray->side == 1)
-			color = data->textures->addr_e[data->game->x * data->ray->tex_y
-				+ data->ray->tex_x];
+			color = data->textures->addr_e[tex_index];
 		else
-			color = data->textures->addr_w[data->game->x * data->ray->tex_y
-				+ data->ray->tex_x];
+			color = data->textures->addr_w[tex_index];
 		data->game->addr[loop * WIDTH + col] = color;
 		loop++;
 	}
@@ -83,11 +83,11 @@ int	draw_textures(t_data *data)
 	while (++col < WIDTH)
 	{
 		var_set(data, col);
-		wall_control(data);
-		wall_hit(data);
-		calculate_distance(data);
+		calculate_ray_piece(data);
+		side_hit(data);
+		calculate_side_distance(data);
 		set_image_values(data);
-		draw_image(data, col);
+		draw_col(data, col);
 	}
 	mlx_put_image_to_window(data->game->mlx, data->game->win, data->game->img,
 		0, 0);

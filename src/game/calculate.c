@@ -6,7 +6,7 @@
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:59:16 by senyilma          #+#    #+#             */
-/*   Updated: 2024/05/07 17:51:02 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/05/09 20:25:45 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	var_set(t_data *data, int width)
 {
 	data->ray->camera_x = 2 * width / (double)WIDTH - 1;
-	data->ray->raydir_x = data->view->dir_x + data->view->plane_x
+	data->ray->raydir_x = data->view->dir_x + (data->view->plane_x)
 		* data->ray->camera_x;
-	data->ray->raydir_y = data->view->dir_y + data->view->plane_y
+	data->ray->raydir_y = data->view->dir_y + (data->view->plane_y)
 		* data->ray->camera_x;
 	data->ray->pos_x = (int)data->player->pos_x;
 	data->ray->pos_y = (int)data->player->pos_y;
@@ -25,7 +25,7 @@ void	var_set(t_data *data, int width)
 	data->ray->deltadist_y = fabs(1 / data->ray->raydir_y);
 }
 
-void	wall_control(t_data *data)
+void	calculate_ray_piece(t_data *data)
 {
 	if (data->ray->raydir_x < 0)
 	{
@@ -53,7 +53,7 @@ void	wall_control(t_data *data)
 	}
 }
 
-void	wall_hit(t_data *data)
+void	side_hit(t_data *data)
 {
 	int	hit;
 
@@ -77,38 +77,34 @@ void	wall_hit(t_data *data)
 	}
 }
 
-void	calculate_distance(t_data *data)
+void	calculate_side_distance(t_data *data)
 {
 	if (data->ray->side == 0)
-		data->ray->perpwalldist = data->ray->sidedist_x
+		data->ray->plane_wall_dist = data->ray->sidedist_x
 			- data->ray->deltadist_x;
 	else
-		data->ray->perpwalldist = data->ray->sidedist_y
+		data->ray->plane_wall_dist = data->ray->sidedist_y
 			- data->ray->deltadist_y;
-	data->ray->lineheight = (int)(HEIGHT / data->ray->perpwalldist);
-	data->ray->drawstart = -data->ray->lineheight / 2 + HEIGHT / 2;
-	if (data->ray->drawstart < 0)
-		data->ray->drawstart = 0;
-	data->ray->drawend = data->ray->lineheight / 2 + HEIGHT / 2;
-	if (data->ray->drawend >= HEIGHT)
-		data->ray->drawend = HEIGHT - 1;
+	data->ray->draw_height = (int)(HEIGHT / data->ray->plane_wall_dist);
+	data->ray->draw_start = -data->ray->draw_height / 2 + HEIGHT / 2;
+	if (data->ray->draw_start < 0)
+		data->ray->draw_start = 0;
+	data->ray->draw_end = data->ray->draw_height / 2 + HEIGHT / 2;
+	if (data->ray->draw_end >= HEIGHT)
+		data->ray->draw_end = HEIGHT - 1;
 }
 
 void	set_image_values(t_data *data)
 {
 	if (data->ray->side == 0)
-		data->ray->hit_x = data->player->pos_y + data->ray->perpwalldist
+		data->ray->hit_x = data->player->pos_y + data->ray->plane_wall_dist
 			* data->ray->raydir_y;
 	else
-		data->ray->hit_x = data->player->pos_x + data->ray->perpwalldist
+		data->ray->hit_x = data->player->pos_x + data->ray->plane_wall_dist
 			* data->ray->raydir_x;
 	data->ray->hit_x -= floor(data->ray->hit_x);
 	data->ray->tex_x = (int)(data->ray->hit_x * 64);
-	if (data->ray->side == 0 && data->ray->raydir_x > 0)
-		data->ray->tex_x = 64 - data->ray->tex_x - 1;
-	if (data->ray->side == 1 && data->ray->raydir_y < 0)
-		data->ray->tex_x = 64 - data->ray->tex_x - 1;
-	data->ray->pixel_cal = 1.0 * 64 / data->ray->lineheight;
-	data->ray->pixel_num = (data->ray->drawstart - HEIGHT / 2
-			+ data->ray->lineheight / 2) * data->ray->pixel_cal;
+	data->ray->unit_per_pix = 1.0 * 64 / data->ray->draw_height;
+	data->ray->tex_y_pix_end = (data->ray->draw_start - HEIGHT / 2
+			+ data->ray->draw_height / 2) * data->ray->unit_per_pix;
 }

@@ -6,7 +6,7 @@
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 18:35:51 by acan              #+#    #+#             */
-/*   Updated: 2024/05/07 18:45:26 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/05/09 20:28:41 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_texture
 	int			*addr_s;
 	int			*addr_w;
 	int			*addr_e;
+	int			size;
 }				t_texture;
 
 typedef struct s_player
@@ -74,15 +75,15 @@ typedef struct s_ray
 	int			side;
 	int			step_x;
 	int			step_y;
-	double		perpwalldist; //vertical falan yap
-	int			lineheight; //drawheight
-	int			drawstart;
-	int			drawend;
+	double		plane_wall_dist;
+	int			draw_height;
+	int			draw_start;
+	int			draw_end;
 	double		hit_x;
-	int			tex_x; //displaying part of the texture relative to x
-	double		pixel_cal; //units per pixel
-	double		pixel_num; //texture starting pixel relative to y
-	int			tex_y;
+	int			tex_x;
+	int			tex_y_pix_start;
+	double		unit_per_pix; //units per pixel
+	double		tex_y_pix_end; //texture starting pixel relative to y
 }				t_ray;
 
 typedef struct s_game
@@ -96,7 +97,6 @@ typedef struct s_game
 	int			endian;
 	double		move_speed;
 	double		rot_speed;
-	int			x; //isim verr!!
 }				t_game;
 
 typedef struct s_keys
@@ -126,9 +126,9 @@ typedef struct s_data
 void			game(t_data *data);
 int				draw_textures(t_data *data);
 void			var_set(t_data *data, int width);
-void			wall_control(t_data *data);
-void			wall_hit(t_data *data);
-void			calculate_distance(t_data *data);
+void			calculate_ray_piece(t_data *data);
+void			side_hit(t_data *data);
+void			calculate_side_distance(t_data *data);
 void			set_image_values(t_data *data);
 
 int				key_press(int key, t_data *data);

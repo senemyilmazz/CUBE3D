@@ -30,11 +30,11 @@ $(MLX):
 
 $(NAME): $(LIBFT) $(MLX) $(OBJS)
 	$(CC) $(CFLAGS) $(MFLAGS) $(SRCS) $(MLX) $(LIBFT) -o $(NAME)
-	@rm -rf $(OBJS)
 
 clean:
 	@make clean -C ./inc/libft
 	@make clean -C ./mlx
+	@rm -rf $(OBJS)
 
 
 fclean: clean
