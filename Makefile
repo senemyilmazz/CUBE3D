@@ -3,7 +3,7 @@ SRCS =	./inc/get_next_line/get_next_line_utils.c ./inc/get_next_line/get_next_li
 		./src/cub3D.c ./src/utils/utils.c ./src/utils/error_utils.c \
 		./src/file_check/check_file.c ./src/file_check/check_file_path.c ./src/file_check/check_textures.c \
 		./src/file_check/check_map.c ./src/file_check/check_map_utils.c  ./src/file_check/check_map_is_valid_utils.c\
-		./src/game/game_init.c ./src/game/draw_textures.c ./src/game/calculate.c ./src/game/movements.c ./src/game/key_inputs.c\
+		./src/game/game.c ./src/game/draw_textures.c ./src/game/draw_calculations.c ./src/game/movements.c ./src/game/key_inputs.c\
 		./src/game/cam.c
 
 LIBFT = ./inc/libft/libft.a
@@ -16,7 +16,7 @@ NAME = cub3D
 
 CC = @gcc
 
-CFLAGS = -Wall -Werror -Wextra -g #-fsanitize=address 
+CFLAGS = -Wall -Werror -Wextra
 MFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 

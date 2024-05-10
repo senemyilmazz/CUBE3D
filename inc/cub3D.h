@@ -6,7 +6,7 @@
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 18:35:51 by acan              #+#    #+#             */
-/*   Updated: 2024/05/10 14:20:53 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/05/10 15:15:08 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ typedef struct s_ray
 	double		camera_x;
 	double		raydir_x;
 	double		raydir_y;
-	double		old_dir_x;
 	int			pos_x;
 	int			pos_y;
 	double		deltadist_x;
@@ -81,9 +80,9 @@ typedef struct s_ray
 	int			draw_end;
 	double		hit_x;
 	int			tex_x;
+	double		unit_per_pix;
 	int			tex_y;
-	double		unit_per_pix; //units per pixel
-	double		tex_y_next; //texture starting pixel relative to y
+	double		tex_y_next;
 }				t_ray;
 
 typedef struct s_game
