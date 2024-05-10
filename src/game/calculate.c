@@ -6,7 +6,7 @@
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 19:59:16 by senyilma          #+#    #+#             */
-/*   Updated: 2024/05/09 20:25:45 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/05/10 14:19:19 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	calculate_side_distance(t_data *data)
 		data->ray->draw_end = HEIGHT - 1;
 }
 
-void	set_image_values(t_data *data)
+void	set_texture_starting_pixel(t_data *data)
 {
 	if (data->ray->side == 0)
 		data->ray->hit_x = data->player->pos_y + data->ray->plane_wall_dist
@@ -105,6 +105,6 @@ void	set_image_values(t_data *data)
 	data->ray->hit_x -= floor(data->ray->hit_x);
 	data->ray->tex_x = (int)(data->ray->hit_x * 64);
 	data->ray->unit_per_pix = 1.0 * 64 / data->ray->draw_height;
-	data->ray->tex_y_pix_end = (data->ray->draw_start - HEIGHT / 2
+	data->ray->tex_y_next = (data->ray->draw_start - HEIGHT / 2
 			+ data->ray->draw_height / 2) * data->ray->unit_per_pix;
 }

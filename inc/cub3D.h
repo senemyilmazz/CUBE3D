@@ -6,7 +6,7 @@
 /*   By: senyilma <senyilma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 18:35:51 by acan              #+#    #+#             */
-/*   Updated: 2024/05/09 20:28:41 by senyilma         ###   ########.fr       */
+/*   Updated: 2024/05/10 14:20:53 by senyilma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ typedef struct s_ray
 	int			draw_end;
 	double		hit_x;
 	int			tex_x;
-	int			tex_y_pix_start;
+	int			tex_y;
 	double		unit_per_pix; //units per pixel
-	double		tex_y_pix_end; //texture starting pixel relative to y
+	double		tex_y_next; //texture starting pixel relative to y
 }				t_ray;
 
 typedef struct s_game
@@ -129,7 +129,7 @@ void			var_set(t_data *data, int width);
 void			calculate_ray_piece(t_data *data);
 void			side_hit(t_data *data);
 void			calculate_side_distance(t_data *data);
-void			set_image_values(t_data *data);
+void			set_texture_starting_pixel(t_data *data);
 
 int				key_press(int key, t_data *data);
 int				key_release(int key, t_data *data);
